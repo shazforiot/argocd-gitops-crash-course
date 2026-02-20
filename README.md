@@ -117,6 +117,10 @@ kubectl apply -f argocd/application.yaml
 # Check sync status
 argocd app get gitops-demo
 
+# to delete.
+argocd app delete gitops-demo
+kubectl delete application gitops-demo -n argocd
+
 # Or watch in the UI — you should see the app appear and sync
 ```
 
