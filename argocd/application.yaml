@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitops-demo
+  namespace: argocd
+  # Auto-delete resources when the Application is deleted
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    # ── Point to your config/manifests repository ──────────
+    repoURL: https://github.com/your-org/gitops-demo-config
+    targetRevision: HEAD          # Track the main branch tip
+    path: k8s                     # Folder containing your manifests
+
+  destination:
+    server: https://kubernetes.default.svc   # In-cluster deployment
+    namespace: default
+
+  syncPolicy:
+    automated:
+      prune: true       # Delete K8s resources removed from Git
+      selfHeal: true    # Revert manual cluster changes back to Git state
+    syncOptions:
+    - CreateNamespace=true        # Auto-create namespace if missing
+    - PrunePropagationPolicy=foreground
+    retry:
+      limit: 3                    # Retry failed syncs up to 3 times
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 3m
+
+  # Health check overrides (optional — ArgoCD has built-in health for standard resources)
+  # ignoreDifferences:
+  # - group: apps
+  #   kind: Deployment
+  #   jsonPointers:
+  #   - /spec/replicas          # Ignore replicas if managed by HPA
