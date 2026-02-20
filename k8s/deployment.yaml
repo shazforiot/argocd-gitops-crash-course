@@ -24,7 +24,7 @@ spec:
       containers:
       - name: gitops-demo
         # ⬇️ This image tag is updated by the CI pipeline (GitHub Actions)
-        image: ghcr.io/shazforiot/argocd-gitops-crash-course:a4ed9b5
+        image: ghcr.io/shazforiot/argocd-gitops-crash-course:0c64446
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
