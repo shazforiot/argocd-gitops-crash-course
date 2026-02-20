@@ -10,8 +10,8 @@ spec:
   project: default
 
   source:
-    # ── Point to your config/manifests repository ──────────
-    repoURL: https://github.com/your-org/gitops-demo-config
+    # ── Same repo — ArgoCD watches the k8s/ folder ──────────
+    repoURL: https://github.com/shazforiot/argocd-gitops-crash-course
     targetRevision: HEAD          # Track the main branch tip
     path: k8s                     # Folder containing your manifests
 

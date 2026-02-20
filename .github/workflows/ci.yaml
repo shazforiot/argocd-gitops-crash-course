@@ -110,11 +110,11 @@ jobs:
       env:
         PAT: ${{ secrets.CONFIG_REPO_PAT }}
 
-    - name: Checkout config repo
+    - name: Checkout this repo (k8s manifests live here too)
       if: steps.check.outputs.configured == 'true'
       uses: actions/checkout@v4
       with:
-        repository: your-org/gitops-demo-config
+        repository: shazforiot/argocd-gitops-crash-course
         token: ${{ secrets.CONFIG_REPO_PAT }}
         ref: main
 

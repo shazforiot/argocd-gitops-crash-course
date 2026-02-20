@@ -91,10 +91,22 @@ argocd login localhost:8080 \
   --insecure
 ```
 
-### 5. Fork & configure the repos
+### 5. Configure the repo URL
 
-1. Fork this repo (or create two separate repos: app + config)
-2. Update the `repoURL` in `argocd/application.yaml` to point to your fork
+No fork needed — ArgoCD can watch this repo directly.
+The `k8s/` folder already contains the manifests ArgoCD will sync.
+
+Update `argocd/application.yaml` with your GitHub username if you cloned this repo:
+
+```yaml
+source:
+  repoURL: https://github.com/<your-username>/argocd-gitops-crash-course
+  path: k8s
+```
+
+> **Tip:** For production, keeping app code and k8s manifests in separate repos
+> gives you independent access controls and cleaner history. For learning/demos,
+> one repo is perfectly fine.
 
 ### 6. Deploy the ArgoCD Application
 
