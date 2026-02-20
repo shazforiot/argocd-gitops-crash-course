@@ -12,7 +12,7 @@ app.get('/health', (_, res) => {
 // Main endpoint — shows deployment info
 app.get('/', (_, res) => {
   res.json({
-    message: '🚀 GitOps Demo App — Deployed with ArgoCD!, This is super cool!',
+    message: '🚀 GitOps Demo App — Deployed with ArgoCD!, This is super cool!, Adding the replica count to 3',
     version: process.env.APP_VERSION || '1.0.0',
     environment: process.env.NODE_ENV || 'development',
     hostname: os.hostname(),          // Shows which pod is serving
